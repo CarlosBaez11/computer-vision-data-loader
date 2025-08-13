@@ -4,11 +4,12 @@ import requests
 from typing import Annotated, Callable, Iterator, Sequence
 
 import numpy as np
+from numpy.typing import NDArray
 
 
 @dataclasses.dataclass
 class Row:
-    image: np.ndarray
+    image: NDArray[np.uint8]
     name: str
 
 
