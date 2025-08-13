@@ -6,6 +6,7 @@ If you need a refresher on the topics needed to solve the challenge, read:
 
 * https://realpython.com/python-concurrency/
 * https://realpython.com/python-iterators-iterables/
+* https://realpython.com/intro-to-python-threading/
 
 Or even practice a little bit first with: https://github.com/open-homeworks/concurrent-downloads
 
