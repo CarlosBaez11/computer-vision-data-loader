@@ -6,9 +6,7 @@ import uuid
 import pytest
 import numpy as np
 from PIL import Image
-
 from src import loader
-
 
 def test_loads_all_data(tmp_path: pathlib.Path):
     image_1 = np.random.randint(0, 255, (10, 20, 3), dtype=np.uint8)

@@ -2,7 +2,6 @@ import dataclasses
 import pathlib
 import requests
 from typing import Annotated, Callable, Iterator, Sequence
-
 import numpy as np
 from numpy.typing import NDArray
 

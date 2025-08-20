@@ -1,4 +1,5 @@
 .venv
+.myenv
 .mypy_cache
 .pytest_cache
 .ipynb_checkpoints
