@@ -27,16 +27,16 @@ async def maybe_download_sprite(session, sprite_url: str):
 
 async def download_and_save_pokemon(session, pokemon, output_dir) -> Optional[Row]:
     """Download and save a single pokemon."""
-    async with asyncio.Semaphore(5):
-        content =  await maybe_download_sprite(session, pokemon["Sprite"])
-        if content is not None:
-            await asyncio.sleep(1)
-            target_dir = os.path.join(output_dir, pokemon["Type1"])
-            utils.maybe_create_dir(target_dir)
-            filepath = os.path.join(target_dir, pokemon["Pokemon"] + ".png")
-            utils.write_binary(filepath, content)
-            print(f"Donwloading {pokemon['Pokemon']}")
-            return Row(image = np.array(Image.open(filepath)), name=pokemon['Pokemon'])
+
+    content =  await maybe_download_sprite(session, pokemon["Sprite"])
+
+    if content is not None:
+        target_dir = os.path.join(output_dir, pokemon["Type1"])
+        utils.maybe_create_dir(target_dir)
+        filepath = os.path.join(target_dir, pokemon["Pokemon"] + ".png")
+        utils.write_binary(filepath, content)
+        print(f"Donwloading {pokemon['Pokemon']}")
+        return Row(image = np.array(Image.open(filepath)), name=pokemon['Pokemon'])
 
 async def image_downloader(queue: Queue, pokemons, output_dir: str):
     async with aiohttp.ClientSession() as session:
@@ -49,12 +49,16 @@ async def image_downloader(queue: Queue, pokemons, output_dir: str):
 
 
 async def image_loader(queue: Queue):
+    
     while True:
+        start = time.perf_counter()
         row: Row = await queue.get()
         if row is None:
             queue.task_done()
             break 
+        end = time.perf_counter()
         print(f"Loaded {row.name} ({row.image.shape})")
+        print(f"Carga de {row.name}  en {end - start:.2f} s")
         queue.task_done()
 
 
