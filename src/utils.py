@@ -68,3 +68,6 @@ def maybe_download_sprite(session, sprite_url: str):
         if response.status_code == 200:
             content = response.content
     return content
+
+def delete_file(filepath: str) -> None:
+    os.remove(filepath)

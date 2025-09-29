@@ -1,0 +1,19 @@
+// Asyncio Queues Pipeline
+digraph {
+	P [label="Pokemons (Input)"]
+	D [label="Downloader
+(FilePath)"]
+	Q1 [label=producer_queue]
+	R [label="Reader
+(FilePath → Row)"]
+	Q2 [label=consumer_queue]
+	L [label="Loader
+(Row)"]
+	L [label="Delete Image
+(Row)"]
+	P -> D
+	D -> Q1
+	Q1 -> R
+	R -> Q2
+	Q2 -> L
+}
